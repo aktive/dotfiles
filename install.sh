@@ -32,3 +32,4 @@ EOT
 fi
 
 echo "install complete. run: source ~/.bashrc"
+echo ""

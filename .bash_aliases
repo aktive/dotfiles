@@ -7,8 +7,21 @@ alias rmv="rsync -avP --remove-source-files"
 alias mounts="findmnt -t nfs,nfs4"
 alias ll="ls -alF"
 alias hdd="lsblk -o NAME,FSTYPE,SIZE,MOUNTPOINT,LABEL,MODEL"
-alias hdd-health="sudo smartctl -H /dev/nvme0n1 && sudo smartctl -H /dev/nvme1n1"
 alias hdd-usage="df -hT --exclude-type=tmpfs --exclude-type=overlay --exclude-type=squashfs"
+
+function hdd-health() {
+    if ! command -v smartctl &> /dev/null; then
+        echo "❌ smartctl not found... sudo apt install smartmontools"
+        return
+    fi
+    echo "🔍 scanning for drives..."
+    sudo smartctl --scan | awk '{print $1}' | while read -r drive; do
+        echo "----------------------------------------"
+        echo -e "💾 drive: \033[1;36m$drive\033[0m"
+        sudo smartctl -H "$drive" | grep -E --color=never "result:|PASSED|FAILED|Critical" || echo "Status: Unknown (Check manual output)"
+    done
+    echo "----------------------------------------"
+}
 
 # 'hog': takes a pig to find a pig
 # usage:
