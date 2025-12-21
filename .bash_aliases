@@ -1,5 +1,3 @@
-if [ -n "$AKTIVE_ALIASES_LOADED" ]; then return; fi
-export AKTIVE_ALIASES_LOADED=1
 echo "🔥 aktivated $HOSTNAME..."
 echo ""
 alias rcp="rsync -avP"
