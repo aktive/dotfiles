@@ -56,6 +56,9 @@ function hog() {
     esac
 }
 
+# load local-only scripts (not committed)
+[ -r ~/dotfiles/ghh.sh ] && . ~/dotfiles/ghh.sh
+
 # pull dots from gh
 pull-dots() {
     current_dir=$(pwd)
