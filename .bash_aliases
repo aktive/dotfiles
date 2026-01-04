@@ -1,5 +1,5 @@
-echo "🔥 aktivated $HOSTNAME..."
-echo ""
+# only show for interactive shells (rsync/scp need clean stdout)
+[[ $- == *i* ]] && echo "🔥 aktivated $HOSTNAME..." && echo ""
 alias rcp="rsync -avP"
 alias rmv="rsync -avP --remove-source-files"
 alias mounts="findmnt -t nfs,nfs4"
